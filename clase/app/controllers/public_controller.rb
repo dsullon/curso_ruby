@@ -1,5 +1,4 @@
 class PublicController < ApplicationController
-    def index
-        @products = Product.all        
+    def index     
     end
 end
