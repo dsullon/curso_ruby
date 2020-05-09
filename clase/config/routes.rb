@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   post "products", to: "products#create"
   get "product/:id", to: "products#show", as: "show_product"
   get "products/new", to: "products#new"
+  delete "products/:id", to: "products#destroy", as: "delete_product"
 end
