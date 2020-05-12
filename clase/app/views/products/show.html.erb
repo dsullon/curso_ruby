@@ -3,8 +3,12 @@
   <div class="card-body">
     <h5 class="card-title"><%= @product.name %></h5>
     <h6 class="card-subtitle mb-2 text-muted"><%= @product.code %></h6>
+    <% if !@product.category.nil? %>
+      <%= @product.category.name %>
+    <% end %>
     <p class="card-text"><%= @product.comments%></p>
-    <a href="#" class="card-link">Editar</a>
-    <a href="#" class="card-link">Eliminar</a>
+    <%= link_to "Editar", edit_product_path(@product), class: "card-link"%>
+    <%= link_to "Eliminar", delete_product_path(@product), method: :delete,
+      data:{ confirm: "¿Estás seguro de eliminar?"} %>
   </div>
 </div>

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
     def index
-        @products = Product.all
+        @products = Product.paginate(:page => params[:page], :per_page=>10)
     end
 
     def new
@@ -24,6 +24,16 @@ class ProductsController < ApplicationController
         @product = Product.find(params[:id])
         @product.destroy
         redirect_to products_path
+    end
+
+    def edit
+        @product = Product.find(params[:id])
+    end
+
+    def update
+        @product = Product.find(params[:id])
+        @product.update_attributes(product_params)
+        redirect_to show_product_path(@product)
     end
 
     private
