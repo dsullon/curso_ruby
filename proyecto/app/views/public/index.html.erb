@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+    Usuario:<%= current_user.last_name %>
+<% else%>
+    No inicio sesión
+<% end %>
+
+<%= link_to "Salir", destroy_user_session_path, method: :delete %>
