@@ -10,12 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_010456) do
+ActiveRecord::Schema.define(version: 2020_05_14_013349) do
 
   create_table "areas", force: :cascade do |t|
     t.string "code"
     t.string "name"
     t.integer "level"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "document_types", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "number"
+    t.date "date"
+    t.decimal "total"
+    t.string "currency"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "accepted"
+    t.integer "area_id"
+    t.integer "suppier_id"
+    t.integer "document_type_id"
+    t.index ["area_id"], name: "index_documents_on_area_id"
+    t.index ["document_type_id"], name: "index_documents_on_document_type_id"
+    t.index ["suppier_id"], name: "index_documents_on_suppier_id"
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "taxt_id"
+    t.string "name"
+    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

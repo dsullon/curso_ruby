@@ -1,0 +1,14 @@
+<h3>Nuevo documento</h3>
+<hr/>
+<%= form_for @document, url: documents_path(@document) do |f| %>
+    <%= f.label :number %>
+    <%= f.text_field :number %>
+
+    <br/>
+    <%= f.label :date %>
+    <%= f.text_field :date %>
+
+    <br/>
+    <%= f.label :total %>
+    <%= f.text_field :total %>
+<% end %>

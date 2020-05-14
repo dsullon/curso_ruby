@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="margin-bottom: 350px" id="mainNav">
+    <div class="container">
+        <%= link_to "Proyecto", root_path, class:"navbar-brand"%>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <%= link_to "Inicio", dashboard_path, class:"nav-link"%>
+            </li>
+            <li class="nav-item">
+                <%= link_to "Documents", documents_path, class:"nav-link"%>
+            </li>
+            <li class="nav-item">
+                <%= link_to "Sign out", destroy_user_session_path, class:"nav-link", method: :delete %>
+            </li>
+        </ul>
+        </div>
+    </div>
+</nav>
