@@ -1,3 +1,28 @@
 <h3>Listado de documentos</h3>
 <hr/>
-<%= link_to "New", new_document_path, class: "btn btn-outline-primary" %>
+<% if current_user.area.code == "RCN" %>
+    <%= link_to "Nuevo", new_document_path, class: "btn btn-outline-primary" %>
+<% end %>
+<table class="table table-bordered table-sm data">
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th>Proveedor</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @documents.each do |doc| %>
+            <tr>
+                <td> <%= link_to doc.number, document_path(doc), class:"btn-link" %></td>
+                <td><%= doc.supplier.name %></td>
+                <td><%= doc.date %></td>
+                <td><%= doc.total %></td>
+                <td><%= doc.status %></td>
+                
+            </tr>
+        <% end %>
+    </tbody>
+</table>

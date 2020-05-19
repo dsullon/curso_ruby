@@ -1,0 +1,72 @@
+<h3>Detalle del documento</h3>
+<hr/>
+
+<% if @document.accepted && @document.last_area.level + 1 == current_user.area.level  %>
+    <%= link_to "Procesar", documents_path, class:"btn btn-outline-info"%>
+<% end %>
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Proveedor</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.supplier.name %>">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Tipo documento</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.document_type.name %>">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Número del documento</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.number %>">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Fecha del documento</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.date %>">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Moneda</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.currency %>">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Importe</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.total %>">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Area</label><br>
+                <input readonly="readonly" class="form-control" 
+                    type="text" value="<%= @document.area.name %>">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Observaciones</label><br>
+            <textarea rows="3" readonly="readonly" class="form-control"><%= @document.comments %>
+            </textarea>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <table class="table">
+            <% @document.document_log.each do |log| %>
+                <tr>
+                    <td><%= log.area.name %></td>
+                    <td><%= log.user.last_name %></td>
+                    <td><%= log.comments %></td>
+                <tr>
+            <% end %>
+        </table>
+    </div>
+</div>

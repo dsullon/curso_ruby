@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to   :area
+  has_many     :document_log
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

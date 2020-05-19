@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_013349) do
+ActiveRecord::Schema.define(version: 2020_05_19_005619) do
 
   create_table "areas", force: :cascade do |t|
     t.string "code"
@@ -18,6 +18,18 @@ ActiveRecord::Schema.define(version: 2020_05_14_013349) do
     t.integer "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "document_logs", force: :cascade do |t|
+    t.integer "document_id"
+    t.integer "user_id"
+    t.integer "area_id"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_document_logs_on_area_id"
+    t.index ["document_id"], name: "index_document_logs_on_document_id"
+    t.index ["user_id"], name: "index_document_logs_on_user_id"
   end
 
   create_table "document_types", force: :cascade do |t|
@@ -37,11 +49,12 @@ ActiveRecord::Schema.define(version: 2020_05_14_013349) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "accepted"
     t.integer "area_id"
-    t.integer "suppier_id"
+    t.integer "supplier_id"
     t.integer "document_type_id"
+    t.integer "status"
     t.index ["area_id"], name: "index_documents_on_area_id"
     t.index ["document_type_id"], name: "index_documents_on_document_type_id"
-    t.index ["suppier_id"], name: "index_documents_on_suppier_id"
+    t.index ["supplier_id"], name: "index_documents_on_supplier_id"
   end
 
   create_table "suppliers", force: :cascade do |t|

@@ -13,9 +13,19 @@
             <li class="nav-item">
                 <%= link_to "Documents", documents_path, class:"nav-link"%>
             </li>
-            <li class="nav-item">
-                <%= link_to "Sign out", destroy_user_session_path, class:"nav-link", method: :delete %>
-            </li>
+            <% if user_signed_in? %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= current_user.last_name %> (<small><%= current_user.area.code %></small>)
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <%= link_to 'Perfil', edit_user_registration_path, class: "dropdown-item" %>
+                        <%= link_to 'Salir', destroy_user_session_path, class: "dropdown-item", method: :delete %>
+                    </div>
+                </li>
+            <% else %>
+                <%= link_to "Iniciar Sesion", new_user_session_path, class: "nav-link" %>                
+            <% end %>
         </ul>
         </div>
     </div>

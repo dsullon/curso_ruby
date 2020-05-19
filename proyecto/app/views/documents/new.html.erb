@@ -1,14 +1,60 @@
 <h3>Nuevo documento</h3>
 <hr/>
 <%= form_for @document, url: documents_path(@document) do |f| %>
-    <%= f.label :number %>
-    <%= f.text_field :number %>
+    <% if @document.errors.any? %>
+        <% @document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    <% end %>
 
-    <br/>
-    <%= f.label :date %>
-    <%= f.text_field :date %>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <%= f.label :supplier_id, "Proveedor" %><br />
+            <%= f.select :supplier_id, Supplier.all.collect {|p| [ p.name, p.id ] }, { :include_blank => "--Seleccione--" }, {:required => true, class: "form-control"} %>
+        </div>
+        <div class="form-group col-md-6">
+            <%= f.label :document_type_id, "Tipo de documento" %><br />
+            <%= f.select :document_type_id, DocumentType.all.collect {|p| [ p.name, p.id ] }, { :include_blank => "--Seleccione--" }, {:required => true,class: "form-control"} %>
+        </div>
+    </div>
 
-    <br/>
-    <%= f.label :total %>
-    <%= f.text_field :total %>
+    <div class="form-row">        
+        <div class="form-group col-md-6">
+            <%= f.label :number, "Número del documento" %><br />
+            <%= f.text_field :number, autofocus: true, autocomplete: "off", :required => true, class: "form-control" %>
+        </div>
+        <div class="form-group col-md-6">
+            <%= f.label :date, "Fecha del documento" %><br />
+            <%= f.text_field :date, 'data-behaviour' => 'datepicker', autocomplete: "off", :required => true, class: "form-control" %>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <%= f.label :currency, "Moneda" %><br />
+            <%= f.select :currency, options_for_select([["Sol", "S/"], ["Dolar Americano", "$"]]), { :include_blank => "--Seleccione--" }, {:required => true,class: "form-control"} %>
+        </div>
+        <div class="form-group col-md-6">
+            <%= f.label :total, "Importe" %><br />
+            <%= f.text_field :total, autocomplete: "off", :required => true, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <%= f.label :area_id, "Área" %><br />
+            <%= f.select :area_id, Area.all.collect {|p| [ p.name, p.id ] }, { :include_blank => "--Seleccione--" }, {:required => true,class: "form-control"} %>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <%= f.label :comments, "Observaciones" %><br />
+            <%= f.text_area :comments, :rows => 3, :required => true, autocomplete: "off", class: "form-control" %>
+        </div>
+    </div>
+    
+    <div class="actions">
+        <%= f.submit "Registrar", class: "btn btn-primary" %>
+    </div>
 <% end %>
