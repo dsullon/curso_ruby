@@ -1,0 +1,44 @@
+<h3>Registrar seguimiento</h3>
+<hr/>
+<%= form_for @log, as: :log, url: document_traking_path(@log) do |f| %>
+    <% if @log.errors.any? %>
+        <% @log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    <% end %>
+
+    <%= f.hidden_field :document_id, value: @document.id %>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Tipo de documento</label><br>
+            <input readonly="readonly" class="form-control" 
+                type="text" value="<%= @document.document_type.code %> - <%= @document.document_type.name %>">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Número del documento</label><br>
+            <input readonly="readonly" class="form-control" 
+                type="text" value="<%= @document.number %>">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Importe</label><br>
+            <input readonly="readonly" class="form-control" 
+                type="text" value="<%= number_to_currency(@document.total, unit: "S/ ", delimiter: ",") %>">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Proveedor</label><br>
+            <input readonly="readonly" class="form-control" 
+                type="text" value="<%= @document.supplier.name %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :comments, "Observaciones" %><br />
+        <%= f.text_area :comments, :rows => 3, :required => true, autocomplete: "off", class: "form-control" %>
+    </div>
+    
+    <div class="actions">
+        <%= f.submit "Registrar", class: "btn btn-primary" %>
+    </div>
+<% end %>

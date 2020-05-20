@@ -1,1 +1,36 @@
-Pagina privada principal
+<h3>Documentos pendientes</h3>
+<hr/>
+<div class="table-responsive">
+    <table class="table table-bordered table-sm data">
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">Proveedor</th>
+                <th class="text-center" scope="col">Documento</th>
+                <th class="text-center" scope="col">Importe</th>
+                <th class="text-center" scope="col">Fecha</th>
+                <th class="text-center" scope="col">Aceptar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @documents.each do |doc|%>
+                <tr>
+                    <td><%= doc.supplier.name %></td>
+                    <td><%= doc.document_type.code %> <%= doc.number %></td>
+                    <td><%= doc.total %></td>
+                    <td><%= doc.date %></td>
+                    <td>
+                        <%= link_to "<i class='fa fa-check-circle'></i>".html_safe, 
+                            document_approval_path(:id => doc.id, :status => true), method: :put,
+                            data: {confirm: "El documento se va a aprobar.¿Seguro de continuar?"}, 
+                            class: "btn btn-success" %>
+                        <%= link_to "<i class='fa fa-times-circle'></i>".html_safe, 
+                            document_approval_path(:id => doc.id, :status => false), method: :put,
+                            data: {confirm: "¿Seguro de rechazar el documento?"},
+                            class: "btn btn-danger" %>
+                    </td>
+
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

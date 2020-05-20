@@ -4,9 +4,6 @@ class DocumentsController < ApplicationController
 
     def index
         @documents = Document.all
-        @documents.each do |doc|
-            print doc.number
-        end
     end
 
     def new
@@ -35,6 +32,16 @@ class DocumentsController < ApplicationController
 
     def show
         @document = Document.find(params['id'])        
+    end
+
+    def approval
+        @status = "inproccess"
+        if params[:status] != "true"
+            @status = "canceled"
+        end
+        @document = Document.find(params[:id])
+        @document.update_attributes(:accepted => params[:status], :status => @status)
+        redirect_to dashboard_path
     end
     
     private

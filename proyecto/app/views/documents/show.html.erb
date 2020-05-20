@@ -1,9 +1,5 @@
 <h3>Detalle del documento</h3>
 <hr/>
-
-<% if @document.accepted && @document.last_area.level + 1 == current_user.area.level  %>
-    <%= link_to "Procesar", documents_path, class:"btn btn-outline-info"%>
-<% end %>
 <div class="row">
     <div class="col-md-8">
         <div class="form-row">
@@ -59,14 +55,33 @@
         </div>
     </div>
     <div class="col-md-4">
-        <table class="table">
-            <% @document.document_log.each do |log| %>
-                <tr>
-                    <td><%= log.area.name %></td>
-                    <td><%= log.user.last_name %></td>
-                    <td><%= log.comments %></td>
-                <tr>
+        <h4>Seguimiento</h4>
+        <hr/>
+        <% if @document.accepted && @document.last_area.level + 1 == current_user.area.level %>
+            <%= link_to 'Procesar documento', new_document_traking_path(@document), class: "badge badge-success btn-block" %>
+        <% end %>
+        <div id="accordion">
+            <% @document.document_log.each_with_index  do |log| %>
+                    <div class="card mb-1">
+                        <div class="card-header bg-info" id="<%= log.area.code %>">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white button-card-tracking" data-toggle="collapse" 
+                                    data-target="#collapse<%= log.area.code %>" aria-expanded="true" 
+                                        aria-controls="collapse<%= log.area.code %>">
+                                    <%= log.area.name %>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapse<%= log.area.code %>" class="collapse" aria-labelledby="heading<%= log.area.code %>" data-parent="#accordion">
+                            <div class="card-body">
+                                <p class="card-text"><%= log.comments %></p>
+                                <p class="card-text">
+                                    <small class="text-muted">Creado el <%= log.created_at.strftime("%d-%m-%Y %H:%M:%S") %> por <%= log.user.first_name %> <%= log.user.last_name %></small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
             <% end %>
-        </table>
+        </div>
     </div>
 </div>

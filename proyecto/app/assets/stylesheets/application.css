@@ -15,3 +15,23 @@
  *= require bootstrap.min
  *= require clean-blog.min
  */
+ .card-text {
+    font-size: 18px;
+    margin: 2px;
+  }
+  
+  .card-header {
+    padding: 0px;
+  }
+
+  .button-card-tracking {
+    padding: .375rem .75rem;;
+  }
+
+  .table.data td, .table.data th{
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 5px 10px;
+  }

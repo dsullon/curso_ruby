@@ -19,8 +19,8 @@
                     <%= current_user.last_name %> (<small><%= current_user.area.code %></small>)
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <%= link_to 'Perfil', edit_user_registration_path, class: "dropdown-item" %>
-                        <%= link_to 'Salir', destroy_user_session_path, class: "dropdown-item", method: :delete %>
+                        <%= link_to "<i class='fa fa-user'></i> Perfil".html_safe, edit_user_registration_path, class: "dropdown-item" %>
+                        <%= link_to "<i class='fa fa-sign-out-alt'></i> Salir".html_safe, destroy_user_session_path, class: "dropdown-item", method: :delete %>
                     </div>
                 </li>
             <% else %>
